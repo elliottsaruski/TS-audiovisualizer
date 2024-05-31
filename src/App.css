@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  /* max-width: 1280px; */
+  /* margin: 0 auto; */
+  text-align: center;
+  overflow: hidden;
+}
+
+#full-app-wrapper {
+  display: flex;
+  height: 100dvh;
+  max-width: 100dvw;
+  overflow: hidden;
+}
+
+#visualizer {
+  flex: 1;
+  background-color: black;
+}
+
+#menu {
+  flex: 0.5;
+  background-color: gray;
+  position: relative;
+  /* padding-inline: 2rem; */
+}
+
+#menu h1 {
+  background: chartreuse;
+}
+
+.music-table-wrapper {
+  display: grid;
+  flex: auto;
+}
+#track-scrub {
+  display: grid;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: chartreuse;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+  height: auto;
+}
+
+.scrub-buttons {
+  flex: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
+  gap: 1rem;
+  button {
+    height: 3rem;
+    width: 4rem;
+  }
+}
+
+.scrub-wrapper {
+  display: flex;
+  width: 100%;
+  background-color: black;
+}
+
+table {
+  text-align: start;
+}
+
+th {
+  text-align: start;
+  padding-bottom: 0.5rem;
+}
