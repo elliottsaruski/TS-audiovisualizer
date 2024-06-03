@@ -36,10 +36,6 @@
   background: chartreuse;
 }
 
-.music-table-wrapper {
-  display: grid;
-  flex: auto;
-}
 #track-scrub {
   display: grid;
   position: absolute;
@@ -72,11 +68,6 @@
   background-color: black;
 }
 
-table {
-  text-align: start;
-}
 
-th {
-  text-align: start;
-  padding-bottom: 0.5rem;
-}
+/* ----------------file upload---------------------- */
+
