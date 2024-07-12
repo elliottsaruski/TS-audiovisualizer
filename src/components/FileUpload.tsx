@@ -1,60 +1,72 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState, ChangeEvent } from "react";
+import { useWavesurfer } from "@wavesurfer/react";
 
-function FileUpload() {
-  const [song, setSong] = useState<File | null>(null);
-  const InputRef = useRef<HTMLInputElement>(null);
+const UploadButton = () => {
+  const [uploadError, setUploadError] = useState("");
+  const uploadRef = useRef<HTMLInputElement>(null);
+  const waveSurferRef = useRef<HTMLDivElement>(null);
 
-  function handleFileUpload(e: ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
+  const { wavesurfer, isPlaying } = useWavesurfer({
+    container: waveSurferRef,
+    height: 100, // or any number value
+    waveColor: "black",
+    progressColor: "white",
+    barWidth: 3,
+    barGap: 1,
+    dragToSeek: true,
+    audioRate: 1,
+    mediaControls: true,
+  });
 
-    const audioContext = new AudioContext();
-
-    const file = InputRef.current?.files?.[0];
-    const reader = new FileReader();
+  const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files === null) {
+      return;
+    }
+    const file = e.target.files[0];
 
     if (file) {
-      setSong(file);
-      reader.readAsArrayBuffer(file);
-    }
+      if (file.type !== "audio/wav") {
+        setUploadError("Please upload a .wav file");
+      }
 
-    reader.onloadend = () => {
-      const myArrayBuffer = reader.result;
+      const fileReader = new FileReader();
 
-      console.log(myArrayBuffer);
-      audioContext.decodeAudioData(
-        myArrayBuffer,
-        (audioBuffer) => {
-          // Do something with audioBuffer
-          console.log(audioBuffer);
-          
+      fileReader.onload = (event: ProgressEvent<FileReader>) => {
+        const contents = event?.target?.result;
+        if (wavesurfer && contents) {
+          const blob = new window.Blob(
+            [new Uint8Array(contents as ArrayBuffer)],
+            {
+              type: "audio/wav",
+            }
+          );
+          wavesurfer.loadBlob(blob);
         }
-      );
-    };
+      };
 
-    reader.onerror = (evt: ProgressEvent<FileReader>) => {
-      console.log("error loading file" + evt.target?.result);
-      reader.abort();
-    };
-  }
+      e.target.value = "";
+      fileReader.readAsArrayBuffer(file);
+    } else {
+      setUploadError("File could not be uploaded. Please try again.");
+    }
+  };
 
   return (
     <>
+      <button onClick={() => uploadRef.current?.click()}>Upload</button>
+
       <input
-        aria-label="Upload Audio"
-        type={"file"}
-        id="file"
-        name="file"
-        accept=".wav"
-        multiple={false}
-        ref={InputRef}
-        onChange={(e) => handleFileUpload(e)}
+        type="file"
+        accept="audio/wav"
+        ref={uploadRef}
+        onChange={handleUpload}
+        style={{ display: "none" }}
       />
-      <div id="file-label">open file</div>
-      <section className="waveform-wrapper">
-        {song && <audio controls src={URL.createObjectURL(song)}></audio>}
-      </section>
+
+      {uploadError ? <p>{uploadError}</p> : null}
+      <div ref={waveSurferRef}></div>
     </>
   );
-}
+};
 
-export default FileUpload;
+export default UploadButton;

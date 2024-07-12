@@ -1,5 +1,4 @@
-import FileUpload from "./FileUpload";
-
+import UploadButton from "./FileUpload";
 
 function TrackScrub() {
   return (
@@ -18,8 +17,8 @@ function TrackScrub() {
 function Menu() {
   return (
     <div id="menu">
-      <h1>es-ts-av</h1>
-      <FileUpload />
+      <h1>TSAV</h1>
+      <UploadButton />
       <TrackScrub />
     </div>
   );

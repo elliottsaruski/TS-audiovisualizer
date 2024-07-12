@@ -27,13 +27,14 @@
 
 #menu {
   flex: 0.5;
-  background-color: gray;
+  background-color: rgb(51, 53, 53);
   position: relative;
   /* padding-inline: 2rem; */
 }
 
 #menu h1 {
-  background: chartreuse;
+  font-size: 400%;
+  /* background: red; */
 }
 
 #track-scrub {
@@ -42,7 +43,7 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: chartreuse;
+  /* background-color: red; */
   width: 100%;
   align-items: center;
   gap: 1rem;
@@ -68,6 +69,4 @@
   background-color: black;
 }
 
-
 /* ----------------file upload---------------------- */
-
