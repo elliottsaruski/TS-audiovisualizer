@@ -1,22 +1,27 @@
 import { useRef, useState, ChangeEvent } from "react";
 import { useWavesurfer } from "@wavesurfer/react";
 
-const UploadButton = () => {
+const WavesurferComponent = () => {
   const [uploadError, setUploadError] = useState("");
   const uploadRef = useRef<HTMLInputElement>(null);
   const waveSurferRef = useRef<HTMLDivElement>(null);
 
-  const { wavesurfer, isPlaying } = useWavesurfer({
+  const { wavesurfer } = useWavesurfer({
     container: waveSurferRef,
     height: 100, // or any number value
     waveColor: "black",
-    progressColor: "white",
+    progressColor: "red",
     barWidth: 3,
     barGap: 1,
     dragToSeek: true,
     audioRate: 1,
-    mediaControls: true,
   });
+
+  const onPlayPause = () => {
+    if (wavesurfer !== null) {
+      wavesurfer.playPause();
+    }
+  };
 
   const handleUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) {
@@ -52,9 +57,10 @@ const UploadButton = () => {
   };
 
   return (
-    <>
+    <div id="wavesurfer_WRAPPER">
+      {/* ---------- UPLOAD BUTTON ----------- */}
       <button onClick={() => uploadRef.current?.click()}>Upload</button>
-
+      {/*------------------INPUT ELEMENT FOR FILE-------- */}
       <input
         type="file"
         accept="audio/wav"
@@ -62,11 +68,20 @@ const UploadButton = () => {
         onChange={handleUpload}
         style={{ display: "none" }}
       />
-
+      {/* --------------UPLOAD ERROR--------------- */}
       {uploadError ? <p>{uploadError}</p> : null}
+      {/* ------------------WAVESURFER REF---------- */}
       <div ref={waveSurferRef}></div>
-    </>
+      <h2>title</h2>
+      <div id="controls-wrapper">
+        <button>vol</button>
+        <button id="play-button" onClick={onPlayPause}>
+          play
+        </button>
+        <button>speed</button>
+      </div>
+    </div>
   );
 };
 
-export default UploadButton;
+export default WavesurferComponent;
