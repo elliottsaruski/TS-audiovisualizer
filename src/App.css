@@ -17,33 +17,43 @@
   height: 100dvh;
   max-width: 100%;
   overflow: hidden;
-  border: 1rem solid red;
+  border: 0.25rem solid red;
 }
 
 #visualizer-wrapper {
   display: flex;
   flex-direction: column;
   place-items: center;
-  flex: 3;
+  /* flex: auto; */
   background-color: black;
   overflow: hidden;
 }
 
 #visualizer {
-  flex: auto;
+  /* flex: content; */
+  height: min-content;
   background-color: pink;
 }
 
+#webcam-wrapper {
+  object-fit: contain;
+  height: 100%;
+  flex: 2;
+}
+#webcam-wrapper video {
+  object-fit: contain;
+  width: 20rem;
+  height: 100%;
+  flex: 2;
+}
+
 #visual-controls {
-  flex: 0.05;
-  place-content: center;
-  display: flex;
-  /* height: min-content; */
-  overflow: hidden;
+  flex: 0.25;
 }
 
 .visual-controls-closed {
   opacity: 0;
+  flex: 0;
 }
 
 #UI {

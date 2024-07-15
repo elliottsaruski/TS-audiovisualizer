@@ -1,10 +1,13 @@
 import { useState } from "react";
+import WebCamComponent from "./visual-presets/WebCamComponent";
 
 function Visualizer() {
   const [visualControlsOpen, setVisualControlsOpen] = useState(true);
   return (
     <div id="visualizer-wrapper">
-      <div id="visualizer"></div>
+      <div id="visualizer">
+        <WebCamComponent />
+      </div>
       <button
         onClick={() => {
           setVisualControlsOpen(!visualControlsOpen);

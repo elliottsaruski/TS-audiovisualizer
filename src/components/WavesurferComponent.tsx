@@ -5,6 +5,7 @@ const WavesurferComponent = () => {
   const [uploadError, setUploadError] = useState("");
   const uploadRef = useRef<HTMLInputElement>(null);
   const waveSurferRef = useRef<HTMLDivElement>(null);
+  const [trackTitle, setTrackTitle] = useState("");
 
   const { wavesurfer } = useWavesurfer({
     container: waveSurferRef,
@@ -34,10 +35,15 @@ const WavesurferComponent = () => {
         setUploadError("Please upload a .wav file");
       }
 
+      // SET FILE NAME STATE
+      setTrackTitle(file.name);
+      console.log(file.name);
+
       const fileReader = new FileReader();
 
       fileReader.onload = (event: ProgressEvent<FileReader>) => {
         const contents = event?.target?.result;
+
         if (wavesurfer && contents) {
           const blob = new window.Blob(
             [new Uint8Array(contents as ArrayBuffer)],
@@ -72,7 +78,7 @@ const WavesurferComponent = () => {
       {uploadError ? <p>{uploadError}</p> : null}
       {/* ------------------WAVESURFER REF---------- */}
       <div ref={waveSurferRef}></div>
-      <h2>title</h2>
+      <h2>{trackTitle}</h2>
       <div id="controls-wrapper">
         <button>vol</button>
         <button id="play-button" onClick={onPlayPause}>
