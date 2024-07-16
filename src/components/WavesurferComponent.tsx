@@ -4,6 +4,7 @@ import { AiFillSound } from "react-icons/ai";
 import { PiSpeedometerFill } from "react-icons/pi";
 import { TiUpload } from "react-icons/ti";
 import { BsPlayFill } from "react-icons/bs";
+// import Spectrogram from "wavesurfer.js/dist/plugins/spectrogram.esm.js";
 
 const WavesurferComponent = () => {
   const [uploadError, setUploadError] = useState("");
@@ -11,8 +12,12 @@ const WavesurferComponent = () => {
   const waveSurferRef = useRef<HTMLDivElement>(null);
   const [trackTitle, setTrackTitle] = useState("");
 
+  // const spectrogramRef = useRef<HTMLDivElement>(null);
+
   const [volumeSliderOpen, setVolumeSliderOpen] = useState(false);
   const [volume, setVolume] = useState("");
+
+  const [rateSelectOpen, setRateSelectOpen] = useState(false);
 
   const { wavesurfer } = useWavesurfer({
     container: waveSurferRef,
@@ -24,6 +29,15 @@ const WavesurferComponent = () => {
     dragToSeek: true,
     audioRate: 1,
   });
+
+  // wavesurfer?.registerPlugin(
+  //   Spectrogram.create({
+  //     container: "spectrogramRef",
+  //     labels: true,
+  //     height: 5,
+  //     splitChannels: false,
+  //   })
+  // );
 
   //HANDLE PLAY AND PAUSE
   const onPlayPause = () => {
@@ -97,54 +111,60 @@ const WavesurferComponent = () => {
       {/* --------------UPLOAD ERROR--------------- */}
       {uploadError ? <p>{uploadError}</p> : null}
       {/* ------------------WAVESURFER REF---------- */}
+      {/* <div id="spectrogram" ref={spectrogramRef}></div> */}
+
       <div ref={waveSurferRef}></div>
       <h2>{trackTitle}</h2>
       <div id="controls-wrapper">
         {/* <div> */}
+        <input
+          className={
+            volumeSliderOpen ? "volume-slider-open" : "volume-slider-closed"
+          }
+          type="range"
+          min={0.005}
+          max={1}
+          defaultValue={0.75}
+          step={0.05}
+          onChange={(e) => {
+            if (wavesurfer !== undefined) {
+              setVolume(e.target.value);
+              wavesurfer?.setVolume(parseFloat(e.target.value));
+            }
+          }}
+        />
         <button onClick={onVolumeClicked} id="sound-button">
           <AiFillSound />
-          <input
-            className={
-              volumeSliderOpen ? "volume-slider-open" : "volume-slider-closed"
-            }
-            type="range"
-            min={0.005}
-            max={1}
-            defaultValue={0.75}
-            step={0.05}
-            onChange={(e) => {
-              if (wavesurfer !== undefined) {
-                setVolume(e.target.value);
-                wavesurfer?.setVolume(parseFloat(e.target.value));
-              }
-            }}
-          />
-          {volume}
+          {/* {volume} */}
         </button>
         {/* </div> */}
         <button id="play-button" onClick={onPlayPause}>
           <BsPlayFill />
         </button>
-        <button>
+        <button
+          onClick={() => {
+            setRateSelectOpen(!rateSelectOpen);
+          }}>
           <PiSpeedometerFill />
-          <select
-            name="speed"
-            onChange={(e) => {
-              handleSpeedChange(parseFloat(e.target.value));
-            }}
-            id="speed">
-            <option value={2}>2x</option>
-            <option value={1.5}>1.5x</option>
-            <option value={1}>1x</option>
-            <option value={0.5}>.5x</option>
-            <option value={0.25}>.25x</option>
-          </select>
         </button>
+        <select
+          name="speed"
+          onChange={(e) => {
+            handleSpeedChange(parseFloat(e.target.value));
+          }}
+          id="speed"
+          className={
+            rateSelectOpen ? "rate-select-open" : "rate-select-closed"
+          }>
+          <option value={2}>2x</option>
+          <option value={1.5}>1.5x</option>
+          <option value={1}>1x</option>
+          <option value={0.5}>.5x</option>
+          <option value={0.25}>.25x</option>
+        </select>
       </div>
     </div>
   );
 };
 
 export default WavesurferComponent;
-
-//   wavesurfer.setPlaybackRate(speed, preservePitch)

@@ -1,24 +1,24 @@
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdInformationCircle } from "react-icons/io";
-// import { useState } from "react";
+import { useState } from "react";
 // import { FaCaretDown } from "react-icons/fa";
 
 function SettingsScreen() {
-  //   const [visualControlsOpen, setVisualControlsOpen] = useState(true);
+  const [visualControlsOpen, setVisualControlsOpen] = useState(true);
 
   return (
-    <div>
-      <button>
+    <div id="settings-and-info-buttons-wrapper">
+      <button
+        onClick={() => {
+          setVisualControlsOpen(!visualControlsOpen);
+        }}>
         <IoSettingsSharp />
       </button>
       {/* PUT THESE OPTIONS ON VISUALIZER SCREEN WHEN CLICKED */}
-      {/* <div>
-        <button
-          onClick={() => {
-            setVisualControlsOpen(!visualControlsOpen);
-          }}>
+      <div>
+        {/* <button>
           <FaCaretDown />
-        </button>
+        </button> */}
         <div
           id="visual-controls"
           className={
@@ -42,7 +42,7 @@ function SettingsScreen() {
             <option value="abstract">abstract</option>
           </select>
         </div>
-      </div> */}
+      </div>
       <button>
         <IoMdInformationCircle />
       </button>
