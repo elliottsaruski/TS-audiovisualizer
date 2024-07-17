@@ -15,89 +15,79 @@
   display: flex;
   flex-direction: column;
   height: 100svh;
-  width: 100%;
-  overflow: hidden;
+  width: 100svw;
 }
 
 #visualizer {
-  /* height: 45rem; */
-  width: 100%;
-  flex: auto;
-  height: 100%;
-  position: relative;
-  background-color: black;
-
-  /*   display: flex;
-  flex-direction: column;
-  place-items: center;
-  background-color: black;
-  overflow: hidden;
-  flex: 5; */
-}
-
-#webcam-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-#webcam-wrapper video {
-  object-fit: cover;
-  /* width: 20rem; */
-  padding: 1rem 3rem;
-  max-width: 100%;
-
-  /* UNCOMMENT FOR FULL WIDTH VIDEO */
-  /* height: 100%;
-  width: 100%; */
-  /* flex: auto; */
+  padding: 1rem;
+  flex: 5;
+  height: 25rem;
+  background-color: black;
 }
 
 #default-visual-wrapper,
-#three_d-wrapper {
+#three_d-wrapper,
+#webcam {
   height: 100%;
+  width: 100%;
   max-width: 100%;
+  object-fit: contain;
 }
 
-/* #three_d-wrapper {
-} */
-
-#visual-controls {
-  display: flex;
-  width: 50%;
-  /* margin: 0 auto; */
-  flex: 0.25;
-  position: absolute;
-  top: 10%;
-  left: 25%;
-  height: 5rem;
-  background-color: red;
-  * {
-    width: 100%;
-  }
-}
-
-.visual-controls-closed {
-  opacity: 0;
-  flex: 0;
-  display: none;
+#webcam {
+  object-fit: cover;
 }
 
 #User-interface {
   display: grid;
   flex: auto;
-  padding: 0.5rem;
+  padding: 1rem;
   gap: 2rem;
 }
 
-/* #sound-button {
-} */
+#visual-controls {
+  display: flex;
+  flex: 0.25;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  padding: 1rem;
+
+  select {
+    width: 100%;
+    margin: 0 auto;
+    background-color: transparent;
+    backdrop-filter: blur(30px);
+    font-size: 200%;
+    border: 1px solid gray;
+    border-radius: 0.25rem;
+    height: 5rem;
+    padding: 1rem;
+  }
+  option {
+    color: black;
+  }
+}
+
+.visual-controls-closed {
+  position: relative;
+  display: none;
+  /* opacity: 0; */
+  * {
+    display: none;
+  }
+}
 
 .volume-slider-open {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10rem;
+  left: -1.5rem;
+  rotate: -90deg;
+  z-index: 1000;
+  accent-color: black;
 }
+
 .volume-slider-closed,
 .rate-select-closed {
   display: none;
@@ -107,39 +97,33 @@
   padding: 2rem;
   aspect-ratio: 1;
   border-radius: 20rem;
-  svg {
-    height: 2rem;
-    width: 2rem;
-  }
+  display: grid;
+  place-content: center;
+  place-items: center;
+  /* BUTTON SVG SIZE */
+  font-size: 4rem;
 }
-
-/* #spectrogram {
-  position: absolute;
-  top: 0;
-} */
 
 #wavesurfer_WRAPPER {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  flex: 2;
   gap: 1rem;
-  /* place-content: center; */
+
   button {
     width: min-content !important;
     margin: 0 auto;
   }
 }
 
-:host .canvases {
-  display: grid;
-  gap: 2rem;
-  flex: auto;
+#wavesurfer-ref {
+  background-color: blue;
+  border-radius: 0.25rem;
 }
 
 #controls-wrapper {
   display: flex;
   flex: 1;
-  /* height: min-content; */
   align-items: center;
   justify-content: center;
   gap: 1rem;
@@ -149,16 +133,20 @@
 .rate-select-open {
   display: flex;
   position: absolute;
-  top: 0;
-  right: 1rem;
+  right: 0.5rem;
   z-index: 100;
+  top: 7rem;
+  z-index: 1000;
+  width: min-content;
+  padding: 0.5rem;
 }
 
 #settings-and-info-buttons-wrapper {
   display: flex;
   /* height: min-content; */
-  align-items: end;
+  align-items: center;
   justify-content: center;
   gap: 1rem;
   z-index: 100;
+  margin-top: 1rem;
 }

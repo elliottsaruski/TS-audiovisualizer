@@ -1,9 +1,12 @@
 import DefaultVisualComponent from "./visual-presets/DefaultVisualComponent";
 import ThreeDVisualComponent from "./visual-presets/ThreeDVisualComponent";
 import WebCamComponent from "./visual-presets/WebCamComponent";
+interface Visualizer {
+  visualPreset: string;
+}
 
-function Visualizer({ visualPreset }) {
-  console.log(visualPreset);
+function Visualizer({ visualPreset }: Visualizer) {
+  // console.log(visualPreset);
   if (visualPreset === "CAM") {
     return (
       <div id="visualizer">

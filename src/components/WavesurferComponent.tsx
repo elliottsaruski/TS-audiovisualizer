@@ -9,8 +9,7 @@ const WavesurferComponent = () => {
   const [uploadError, setUploadError] = useState("");
   const uploadRef = useRef<HTMLInputElement>(null);
   const waveSurferRef = useRef<HTMLDivElement>(null);
-  const [trackTitle, setTrackTitle] = useState("");
-
+  const [trackTitle, setTrackTitle] = useState("Upload a track!");
 
   const [volumeSliderOpen, setVolumeSliderOpen] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -22,7 +21,7 @@ const WavesurferComponent = () => {
     container: waveSurferRef,
     height: 100,
     waveColor: "black",
-    progressColor: "red",
+    progressColor: "white",
     barWidth: 3,
     barGap: 1,
     dragToSeek: true,
@@ -86,6 +85,7 @@ const WavesurferComponent = () => {
 
   return (
     <div id="wavesurfer_WRAPPER">
+      <hr />
       {/* ---------- UPLOAD BUTTON ----------- */}
       <button onClick={() => uploadRef.current?.click()}>
         <TiUpload />
@@ -103,7 +103,7 @@ const WavesurferComponent = () => {
       {/* ------------------WAVESURFER REF---------- */}
       {/* <div id="spectrogram" ref={spectrogramRef}></div> */}
 
-      <div ref={waveSurferRef}></div>
+      <div ref={waveSurferRef} id="wavesurfer-ref"></div>
       <h2>{trackTitle}</h2>
       <div id="controls-wrapper">
         {/* <div> */}

@@ -3,11 +3,6 @@ import Visualizer from "./Visualizer";
 import WavesurferComponent from "./WavesurferComponent";
 import { useState } from "react";
 
-interface SettingsScreen {
-  visualControlsOpen: boolean;
-  setVisualControlsOpen: (value: boolean) => void;
-}
-
 function UserInterface() {
   const [visualControlsOpen, setVisualControlsOpen] = useState(false);
   const [visualPreset, setVisualPreset] = useState("DEFAULT");
@@ -15,6 +10,7 @@ function UserInterface() {
   return (
     <div id="User-interface">
       <Visualizer visualPreset={visualPreset} />
+      {/* <hr /> */}
       <WavesurferComponent />
       <SettingsScreen
         visualControlsOpen={visualControlsOpen}

@@ -1,12 +1,17 @@
 import { IoSettingsSharp } from "react-icons/io5";
 import { IoMdInformationCircle } from "react-icons/io";
-
+interface SettingsScreen {
+  visualControlsOpen: boolean;
+  setVisualControlsOpen: (value: boolean) => void;
+  visualPreset: string;
+  setVisualPreset: (value: string) => void;
+}
 function SettingsScreen({
   visualControlsOpen,
   setVisualControlsOpen,
   visualPreset,
   setVisualPreset,
-}) {
+}: SettingsScreen) {
   return (
     <div id="settings-and-info-buttons-wrapper">
       <button
@@ -26,6 +31,7 @@ function SettingsScreen({
           value={visualPreset}
           onChange={(e) => {
             setVisualPreset(e.target.value);
+            setVisualControlsOpen(!visualControlsOpen);
             // console.log(e.target.value);
           }}>
           <option value="DEFAULT">default</option>
