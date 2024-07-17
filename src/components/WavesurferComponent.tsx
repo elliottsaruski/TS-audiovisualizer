@@ -4,7 +4,6 @@ import { AiFillSound } from "react-icons/ai";
 import { PiSpeedometerFill } from "react-icons/pi";
 import { TiUpload } from "react-icons/ti";
 import { BsPlayFill } from "react-icons/bs";
-// import Spectrogram from "wavesurfer.js/dist/plugins/spectrogram.esm.js";
 
 const WavesurferComponent = () => {
   const [uploadError, setUploadError] = useState("");
@@ -12,12 +11,12 @@ const WavesurferComponent = () => {
   const waveSurferRef = useRef<HTMLDivElement>(null);
   const [trackTitle, setTrackTitle] = useState("");
 
-  // const spectrogramRef = useRef<HTMLDivElement>(null);
 
   const [volumeSliderOpen, setVolumeSliderOpen] = useState(false);
-  const [volume, setVolume] = useState("");
+  const [volume, setVolume] = useState(1);
 
   const [rateSelectOpen, setRateSelectOpen] = useState(false);
+  const [rate, setRate] = useState(1);
 
   const { wavesurfer } = useWavesurfer({
     container: waveSurferRef,
@@ -29,15 +28,6 @@ const WavesurferComponent = () => {
     dragToSeek: true,
     audioRate: 1,
   });
-
-  // wavesurfer?.registerPlugin(
-  //   Spectrogram.create({
-  //     container: "spectrogramRef",
-  //     labels: true,
-  //     height: 5,
-  //     splitChannels: false,
-  //   })
-  // );
 
   //HANDLE PLAY AND PAUSE
   const onPlayPause = () => {
@@ -124,11 +114,11 @@ const WavesurferComponent = () => {
           type="range"
           min={0.005}
           max={1}
-          defaultValue={0.75}
+          defaultValue={volume}
           step={0.05}
           onChange={(e) => {
             if (wavesurfer !== undefined) {
-              setVolume(e.target.value);
+              setVolume(parseFloat(e.target.value));
               wavesurfer?.setVolume(parseFloat(e.target.value));
             }
           }}
@@ -148,9 +138,11 @@ const WavesurferComponent = () => {
           <PiSpeedometerFill />
         </button>
         <select
+          value={rate}
           name="speed"
           onChange={(e) => {
             handleSpeedChange(parseFloat(e.target.value));
+            setRate(parseFloat(e.target.value));
           }}
           id="speed"
           className={
@@ -159,6 +151,7 @@ const WavesurferComponent = () => {
           <option value={2}>2x</option>
           <option value={1.5}>1.5x</option>
           <option value={1}>1x</option>
+          <option value={0.75}>.75x</option>
           <option value={0.5}>.5x</option>
           <option value={0.25}>.25x</option>
         </select>
