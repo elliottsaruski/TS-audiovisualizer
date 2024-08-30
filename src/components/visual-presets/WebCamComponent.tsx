@@ -2,8 +2,8 @@ import { useRef } from "react";
 import Webcam from "react-webcam";
 
 const videoConstraints = {
-  width: 750,
-  height: 750,
+  // width: 750,
+  // height: 750,
   facingMode: "user",
 };
 

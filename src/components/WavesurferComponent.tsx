@@ -34,13 +34,13 @@ const WavesurferComponent = () => {
       wavesurfer.playPause();
     }
   };
-  //HANDLE PLAY AND PAUSE
+  //HANDLE VOLUME
   const onVolumeClicked = () => {
     if (wavesurfer !== null) {
       setVolumeSliderOpen(!volumeSliderOpen);
     }
   };
-
+  //HANDLE SPEED CHANGE
   const handleSpeedChange = (speed: number) => {
     wavesurfer?.setPlaybackRate(speed, false);
   };
@@ -85,9 +85,9 @@ const WavesurferComponent = () => {
 
   return (
     <div id="wavesurfer_WRAPPER">
-      <hr />
+      {/* <hr /> */}
       {/* ---------- UPLOAD BUTTON ----------- */}
-      <button onClick={() => uploadRef.current?.click()}>
+      <button id="upload-btn" onClick={() => uploadRef.current?.click()}>
         <TiUpload />
       </button>
       {/*------------------INPUT ELEMENT FOR FILE-------- */}

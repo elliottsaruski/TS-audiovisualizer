@@ -11,39 +11,51 @@
   overflow: hidden;
 }
 
-#full-app-wrapper {
+/* #full-app-wrapper {
   display: flex;
   flex-direction: column;
   height: 100svh;
   width: 100svw;
-}
+  place-items: center;
+  margin: auto;
+  background-color: black !important;
+} */
 
 #visualizer {
-  display: flex;
-  padding: 1rem;
-  flex: 5;
-  height: 25rem;
+  display: grid;
+  grid-auto-columns: 1fr;
+  grid-auto-rows: 1fr;
+  object-fit: cover;
+  max-width: 100%;
+  place-items: center;
+
   background-color: black;
 }
 
 #default-visual-wrapper,
 #three_d-wrapper,
-#webcam {
-  height: 100%;
-  width: 100%;
+#webcam,
+canvas {
+  height: 35rem;
+  width: 100vw;
   max-width: 100%;
-  object-fit: contain;
-}
-
-#webcam {
   object-fit: cover;
 }
 
+/* #webcam {
+  object-fit: cover;
+} */
+
 #User-interface {
+  height: 100vh;
+  max-width: 100%;
+  width: 100%;
+  min-height: -webkit-fill-available;
   display: grid;
-  flex: auto;
-  padding: 1rem;
-  gap: 2rem;
+  justify-content: center;
+  padding-bottom: 1rem;
+  position: relative;
+  background: radial-gradient(var(--clr-medium), var(--clr-lightest));
 }
 
 #visual-controls {
@@ -81,8 +93,8 @@
 
 .volume-slider-open {
   position: absolute;
-  top: 10rem;
-  left: -1.5rem;
+  top: 4rem;
+  left: -1rem;
   rotate: -90deg;
   z-index: 1000;
   accent-color: black;
@@ -108,16 +120,11 @@
   display: flex;
   flex-direction: column;
   flex: 2;
-  gap: 1rem;
-
-  button {
-    width: min-content !important;
-    margin: 0 auto;
-  }
+  gap: 0.5rem;
 }
 
 #wavesurfer-ref {
-  background-color: blue;
+  background-color: rgba(0, 0, 255, 0.411);
   border-radius: 0.25rem;
 }
 
@@ -128,14 +135,15 @@
   justify-content: center;
   gap: 1rem;
   position: relative;
+
 }
 
 .rate-select-open {
   display: flex;
   position: absolute;
-  right: 0.5rem;
+  right: 1rem;
   z-index: 100;
-  top: 7rem;
+  top: 3rem;
   z-index: 1000;
   width: min-content;
   padding: 0.5rem;
@@ -148,5 +156,13 @@
   justify-content: center;
   gap: 1rem;
   z-index: 100;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
+  margin-top: .5rem;
+
+}
+
+#upload-btn {
+  margin: 0 auto;
+  padding: 0.5rem 3.5rem;
+  margin-top: .5rem;
 }
